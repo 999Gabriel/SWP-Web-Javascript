@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personen DOM Manipulation</title>
+    <link rel="stylesheet" href="../css/style-DOM.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 data-text="Personen Verwaltung">Personen Verwaltung</h1>
+        </header>
+        
+        <main>
+            <div class="button-section">
+                <button id="aufbauenBtn" class="aufbauen-button">Aufbauen</button>
+                <p id="personenText" class="personen-text">Personen: ...</p>
+            </div>
+            
+            <div id="personenContainer" class="personen-container" style="display: none;">
+                <!-- Hier werden die Personen dynamisch eingefügt -->
+            </div>
+        </main>
+    </div>
+    
+    <script src="../js/js.DOM.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person Class Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .section { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .colors { display: flex; gap: 10px; }
+        .color-item { padding: 5px 10px; border-radius: 3px; color: white; font-weight: bold; }
+    </style>
+</head>
+<body>
+<h1>Person Class Test</h1>
+<div id="output"></div>
+
+<script src="js/part.js"></script>
+<script>
+    // Display results on the webpage
+    const output = document.getElementById('output');
+    const objectProps = printObject(person);
+
+    output.innerHTML = `
+        <div class="section">
+            <h2>Person Objekt Ausgabe:</h2>
+            <p><strong>Name (mit Klammern):</strong> ${person.name()}</p>
+            <p><strong>Name Methode (ohne Klammern mit toString):</strong> ${person.name.toString()}</p>
+            <p><strong>Vollständige Info:</strong> ${person.getName()}</p>
+            <p><strong>Alter:</strong> ${person.alter}</p>
+            <p><strong>Komplettes Objekt:</strong> ${JSON.stringify(person, null, 2)}</p>
+        </div>
+
+        <div class="section">
+            <h3>PrintObject Funktion Ausgabe:</h3>
+            <ul>
+                ${objectProps.map(prop => `<li>${prop}</li>`).join('')}
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Farben Array Ausgabe:</h3>
+            <p><strong>Array:</strong> [${farben.join(', ')}]</p>
+            <p><strong>Länge:</strong> ${farben.length}</p>
+            <h4>Farbendarstellung:</h4>
+            <div class="colors">
+                ${farben.map(farbe => `<span class="color-item" style="background-color: ${farbe}">${farbe}</span>`).join('')}
+            </div>
+            <h4>Array Durchlauf (mit Index):</h4>
+            <ol>
+                ${farben.map((farbe, index) => `<li>Index ${index}: ${farbe}</li>`).join('')}
+            </ol>
+        </div>
+
+        <br>
+        <p><em>Weitere Details in der Browser-Konsole (F12)</em></p>
+    `;
+</script>
+</body>
+</html>

@@ -1,0 +1,471 @@
+/* Moderne Google Fonts importieren */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* CSS Custom Properties für konsistente Farben */
+:root {
+    /* Hauptfarben */
+    --primary-gradient: linear-gradient(135deg, #2d1b69 0%, #0f1c3f 100%);
+    --secondary-gradient: linear-gradient(135deg, #1a0b2e 0%, #2a1f5c 100%);
+    --accent-gradient: linear-gradient(135deg, #2d1b69 0%, #ffffff 100%);
+    --success-gradient: linear-gradient(135deg, #0f1c3f 0%, #ffffff 100%);
+    --warning-gradient: linear-gradient(135deg, #2a1f5c 0%, #ffffff 100%);
+    
+    /* Elegante Hintergrund Gradients */
+    --bg-primary: linear-gradient(135deg, #1a0b2e 0%, #2d1b69 25%, #0f1c3f 50%, #1e1a3a 75%, #2a1f5c 100%);
+    --bg-secondary: linear-gradient(45deg, #2d1b69 0%, #0f1c3f 100%);
+    --bg-mesh: 
+        linear-gradient(135deg, #1a0b2e 0%, #2d1b69 20%, #0f1c3f 40%, #1e1a3a 60%, #2a1f5c 80%, #ffffff 100%),
+        radial-gradient(ellipse at 25% 25%, rgba(45, 27, 105, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 75%, rgba(15, 28, 63, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 10%, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+    
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    
+    /* Text Farben */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --text-muted: rgba(255, 255, 255, 0.6);
+    
+    /* Schatten */
+    --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --shadow-large: 0 16px 40px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* Reset und Basis */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-mesh);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Animierter Hintergrund */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-mesh);
+    animation: gradientShift 15s ease infinite;
+    z-index: -2;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(45, 27, 105, 0.6) 0%, transparent 70%),
+        radial-gradient(ellipse at 80% 70%, rgba(15, 28, 63, 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse at 60% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 80%, rgba(26, 11, 46, 0.4) 0%, transparent 60%);
+    animation: floatingOrbs 30s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes floatingOrbs {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -30px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Header mit spektakulärer Typografie */
+header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #ffffff 50%, #e0e0e0 75%, #ffffff 100%);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmerText 3s ease-in-out infinite;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    position: relative;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+}
+
+header h1::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--primary-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: -1;
+    filter: blur(20px);
+    opacity: 0.7;
+}
+
+@keyframes shimmerText {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Glassmorphism Button */
+.button-section {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.aufbauen-button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1.2rem 3rem;
+    border: none;
+    border-radius: 50px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid var(--glass-border);
+    color: var(--text-primary);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: var(--shadow-large);
+}
+
+.aufbauen-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-gradient);
+    transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: -1;
+}
+
+.aufbauen-button:hover::before {
+    left: 0;
+}
+
+.aufbauen-button:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.aufbauen-button:active {
+    transform: translateY(-4px) scale(1.02);
+}
+
+/* Glowing Text */
+.personen-text {
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* Personen Container mit Grid */
+.personen-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Spektakuläre Personen-Karten */
+.person-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.person-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    animation: rotate 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.person-card::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 22px;
+    z-index: -1;
+}
+
+.person-card:hover::before {
+    opacity: 1;
+}
+
+.person-card:hover {
+    transform: translateY(-12px) rotateX(5deg);
+    box-shadow: 
+        var(--shadow-xl),
+        0 0 40px rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Holographische Bilder */
+.person-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    background: var(--primary-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    position: relative;
+    box-shadow: 
+        0 0 30px rgba(102, 126, 234, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.1);
+    animation: hologram 3s ease-in-out infinite;
+}
+
+.person-image::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes hologram {
+    0%, 100% { 
+        box-shadow: 
+            0 0 30px rgba(102, 126, 234, 0.4),
+            inset 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+    50% { 
+        box-shadow: 
+            0 0 50px rgba(118, 75, 162, 0.6),
+            inset 0 0 50px rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Moderne Typografie */
+.person-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.person-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.person-birth {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.person-birth::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: slide 2s ease-in-out infinite;
+}
+
+@keyframes slide {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+/* Staggered Animations */
+.person-card {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+    animation: cardAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.person-card:nth-child(1) { animation-delay: 0.1s; }
+.person-card:nth-child(2) { animation-delay: 0.2s; }
+.person-card:nth-child(3) { animation-delay: 0.3s; }
+.person-card:nth-child(4) { animation-delay: 0.4s; }
+.person-card:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes cardAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .personen-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    header {
+        margin-bottom: 2rem;
+    }
+    
+    .personen-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .person-card {
+        padding: 2rem;
+    }
+    
+    .person-image {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .aufbauen-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .person-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus States */
+.aufbauen-button:focus,
+.person-card:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 4px;
+}
