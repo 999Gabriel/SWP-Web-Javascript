@@ -1,0 +1,75 @@
+# =====================================================================================
+# 🐳 DOCKER COMPOSE FÜR JAVASCRIPT PERSONEN-VERWALTUNG
+# =====================================================================================
+# Einfache Orchestrierung für OrbStack
+
+services:
+  # ===== HAUPTANWENDUNG =====
+  personen-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: personen-verwaltung
+    ports:
+      - "8080:80"  # Host-Port:Container-Port
+    restart: unless-stopped
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    volumes:
+      # Optional: Für Entwicklung - Mount des Code-Ordners
+      # - ./code:/usr/share/nginx/html/code:ro
+      - logs:/var/log/nginx  # Logs im Named Volume speichern
+    networks:
+      - personen-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.docker.compose.project=personen-verwaltung"
+      - "com.docker.compose.service=personen-app"
+      - "traefik.enable=true"
+      - "traefik.http.routers.personen.rule=Host(`personen.localhost`)"
+      - "traefik.http.services.personen.loadbalancer.server.port=80"
+
+# ===== NETZWERK =====
+networks:
+  personen-network:
+    driver: bridge
+    name: personen-verwaltung-network
+
+# ===== VOLUMES =====
+volumes:
+  logs:
+    driver: local
+    name: personen-verwaltung-logs
+
+# =====================================================================================
+# 🚀 VERWENDUNG MIT ORBSTACK:
+# =====================================================================================
+#
+# 1. Container starten:
+#    docker-compose up -d
+#
+# 2. Container stoppen:
+#    docker-compose down
+#
+# 3. Logs anzeigen:
+#    docker-compose logs -f
+#
+# 4. Container neu bauen:
+#    docker-compose up --build -d
+#
+# 5. Status prüfen:
+#    docker-compose ps
+#
+# =====================================================================================
+# 🌐 ZUGRIFF:
+# =====================================================================================
+# - Lokal: http://localhost:8080
+# - Mit Traefik: http://personen.localhost (falls Traefik läuft)
+#
+# =====================================================================================

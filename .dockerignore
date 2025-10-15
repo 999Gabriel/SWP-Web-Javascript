@@ -1,0 +1,88 @@
+# =====================================================================================
+# 🚫 DOCKERIGNORE FÜR JAVASCRIPT PERSONEN-VERWALTUNG
+# =====================================================================================
+# Diese Dateien werden NICHT in den Docker-Container kopiert
+
+# ===== VERSIONSKONTROLLE =====
+.git
+.gitignore
+.gitattributes
+
+# ===== DOCKER DATEIEN =====
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# ===== DOKUMENTATION =====
+README.md
+*.md
+*.txt
+
+# ===== TEMPORÄRE DATEIEN =====
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+*.log
+
+# ===== IDE/EDITOR DATEIEN =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== NODE.JS (falls später hinzugefügt) =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===== BACKUP DATEIEN =====
+*.bak
+*.backup
+*~
+
+# ===== WINDOWS DATEIEN =====
+*.lnk
+desktop.ini
+
+# ===== MAC DATEIEN =====
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ===== UNNÖTIGE ORDNER =====
+temp/
+tmp/
+cache/
+
+# ===== SENSIBLE DATEIEN =====
+.env
+.env.local
+.env.production
+.env.development
+secrets/
+*.key
+*.pem
+
+# ===== BUILD ARTEFAKTE =====
+dist/
+build/
+out/
+
+# ===== TEST DATEIEN =====
+test/
+tests/
+__tests__/
+*.test.js
+*.spec.js
+
+# =====================================================================================
+# ✅ WAS WIRD KOPIERT:
+# =====================================================================================
+# - code/ Ordner (HTML, CSS, JS)
+# - Alle .html, .css, .js Dateien
+# - Bilder und Assets
+# - Konfigurationsdateien
+# =====================================================================================
