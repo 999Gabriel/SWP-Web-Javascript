@@ -17,8 +17,10 @@ services:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
     volumes:
-      # Optional: Für Entwicklung - Mount des Code-Ordners
-      # - ./code:/usr/share/nginx/html/code:ro
+      # Entwicklung: Bind-Mount mit langem Syntax (Pfad enthält ":")
+      - type: bind
+        source: /Users/gabriel/SWP-Web/code
+        target: /usr/share/nginx/html/code
       - logs:/var/log/nginx  # Logs im Named Volume speichern
     networks:
       - personen-network
